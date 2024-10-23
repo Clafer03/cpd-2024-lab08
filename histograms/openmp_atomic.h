@@ -2,6 +2,7 @@
 #define OPENMP_ATOMIC_H
 
 #include "histogram.h"
+#include <vector>
 
 class OpenMPAtomic : Histogram {
  public:
