@@ -3,6 +3,8 @@
 #include <random>
 
 #include "sequential.h"
+#include "openmp_atomic.h"
+#include "standar_reduction.h"
 
 static int* randomInput = nullptr;
 static const int MAXIMO_VALOR = 5;
@@ -35,6 +37,24 @@ TEST(SequentialTest, pruebaOK) {
 
   int acum = 0;
   for(auto puntuacion : histograma) acum += puntuacion;
+  EXPECT_EQ(acum, NUMERO_ELEMENTOS);
+}
+
+TEST(OpenMPAtomicTest, pruebaOK) {
+  OpenMPAtomic histogramCalculatorAT2;
+  auto histogramaC = histogramCalculatorAT2.calculate(randomInput, MAXIMO_VALOR, NUMERO_ELEMENTOS);
+
+  int acum = 0;
+  for(auto puntuacion : histogramaC) acum += puntuacion;
+  EXPECT_EQ(acum, NUMERO_ELEMENTOS);
+}
+
+TEST(EstandarReductionTest, pruebaOK) {
+  EstandarReduction histogramCalculatorER;
+  auto histogramaAT = histogramCalculatorER.calculate(randomInput, MAXIMO_VALOR, NUMERO_ELEMENTOS);
+
+  int acum = 0;
+  for(auto puntuacion : histogramaAT) acum += puntuacion;
   EXPECT_EQ(acum, NUMERO_ELEMENTOS);
 }
 
