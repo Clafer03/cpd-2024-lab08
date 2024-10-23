@@ -24,4 +24,5 @@ std::vector<int> EstandarReduction::calculate(const int* input, const int bucket
       histograma[idy] += local_histograma[idx][idy];
     }
   }
+  return histograma;
 }
