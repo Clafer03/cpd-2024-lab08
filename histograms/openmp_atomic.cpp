@@ -4,7 +4,7 @@
 
 std::vector<int> OpenMPAtomic::calculate(const int* input, const int buckets,
                                        const int input_size) {
-  std::atomic<int> histogram(buckets, 0);
+  std::vector<std::atomic<int>> histogram(buckets);
   #pragma omp parallel for
     for(int idx = 0; idx < input_size; idx++) {
       histograma[randomInput[idx] - 1]++;
