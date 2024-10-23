@@ -1,11 +1,12 @@
 #include "openmp_atomic.h"
+#include "omp"
 
-static void BM_openmp_atomic(benchmark::State& state) {
+std::vector<int> OpenMPAtomic::calculate(const int* input, const int buckets,
+                                       const int input_size) {
   std::vector<int> histogram(buckets, 0);
-  for(auto _ : state) {
-    #pragma omp parallel for
-    for(int idx = 0; idx < NUMERO_ELEMENTOS; idx++) {
+  #pragma omp parallel for
+    for(int idx = 0; idx < input_size; idx++) {
       histograma[randomInput[idx] - 1]++;
     }
-  }
+ return histogram;
 }
